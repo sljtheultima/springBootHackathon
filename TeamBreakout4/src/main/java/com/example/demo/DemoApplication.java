@@ -2,24 +2,30 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class DemoApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(DemoApplication.class, args);
+//        SpringApplication.run(DemoApplication.class, args);
+        ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
+        UserService service = ctx.getBean(UserService.class);
+        service.getAllUsers();
+
+        User newUser = new User("test", "test", "testing");
+        service.insertNewUser(newUser);
     }
 
-    @Bean
-    @Scope("application")
-    public Map<Integer, User> userlist() {
-        Map<Integer, User> users = new HashMap<>();
-        users.put(0, new User("wongxx", "012udker!","Wong Xin Xian"));
-        users.put(1, new User("hal", "hjk3n3kf","Sim Li Jin"));
-        users.put(2, new User("chongr", "jnjn3/@34","Goh Chong Rui"));
-        return users;
-    }
-
+//    @Bean
+//    @Scope("application")
+//    public Map<Integer, User> userlist() {
+//        Map<Integer, User> users = new HashMap<>();
+//        users.put(0, new User("wongxx", "012udker!","Wong Xin Xian"));
+//        users.put(1, new User("hal", "hjk3n3kf","Sim Li Jin"));
+//        users.put(2, new User("chongr", "jnjn3/@34","Goh Chong Rui"));
+//        return users;
+//    }
 
 }
