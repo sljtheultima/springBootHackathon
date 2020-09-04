@@ -14,13 +14,11 @@ public class seedDb {
 
     @PostConstruct
     public void init(){
+        repository.deleteAll();
         repository.save(new User("hal", "hjk3n3kf","Sim Li Jin"));
+        repository.save(new User("wongxx", "012udker!","Wong Xin Xian"));
+        repository.save(new User("chongr", "jnjn3/@34","Goh Chong Rui"));
+
     }
-
-    @PreDestroy
-	public void cleanup() {
-		repository.deleteAll();
-	}
-
 
 }

@@ -12,13 +12,6 @@ public class User{
     private String password;
     private String fullname;
 
-//    public User(ObjectId userId, String username, String password, String fullname){
-//        this.userId = userId;
-//        this.username = username;
-//        this.password = password;
-//        this. fullname = fullname;
-//    }
-
     public User(String username, String password, String fullname){
         this.username = username;
         this.password = password;
@@ -31,6 +24,18 @@ public class User{
 
     public void setUserId(ObjectId userId) {
         this.userId = userId;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUsername(){
