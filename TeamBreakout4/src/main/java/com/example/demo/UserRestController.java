@@ -5,18 +5,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
 
+
 public class UserRestController{
 
     @Autowired
     private UserService service;
 
-    @GetMapping(value="/AllUsers", produces={"application/json","application/xml"})
+   /* //For mock implementation for Feature 1
+    @Autowired
+    private Map<Integer, User> userlist;*/
+
+   @GetMapping(value="/AllUsers", produces={"application/json","application/xml"})
     public List<User> getAllUsers() {
         return service.getAllUsers();
     }
@@ -28,6 +34,8 @@ public class UserRestController{
 
     @GetMapping(value="/getUserByFullName/{fullname}", produces={"application/json","application/xml"})
     public List<User> getUserByFullName(@PathVariable String fullname) {
+        System.out.println("Searching by fullname: " + fullname);
+
         return service.getUserByUserName(fullname);
     }
 
@@ -46,7 +54,16 @@ public class UserRestController{
             return ResponseEntity.notFound().build();
         else {
             System.out.println("Updating details of " + username);
-            service.updateUserByUserName(user);
+
+            List<User> listFromDb = service.getUserByUserName(username);
+            User fromUserList = listFromDb.get(0);
+            // Update user from user getter/setter
+            fromUserList.setUsername(user.getUsername());
+            fromUserList.setPassword(user.getPassword());
+            fromUserList.setFullname(user.getFullname());
+
+            service.updateUserByUserName(fromUserList);
+
             return ResponseEntity.ok().build();
         }
     }
@@ -61,6 +78,47 @@ public class UserRestController{
             return ResponseEntity.ok().build();
         }
     }
+
+  /*  //Mock Implementation on userlist for Feature 1
+
+    @GetMapping(value="/AllUsers", produces={"application/json","application/xml"})
+    public ResponseEntity<Collection<User>> getAllUsers() {
+        Collection<User> result = userlist.values();
+        return ResponseEntity.ok().body(result);
+    }
+
+
+    @PostMapping(value="/insertNewUser",consumes={"application/json","application/xml"},
+            produces={"application/json","application/xml"})
+    public ResponseEntity<User> addUser (@RequestBody User user) {
+        System.out.println("Adding " + user);
+        userlist.put(user.getId(), user);
+        URI uri = URI.create("/user/" + user.getUsername());
+        return ResponseEntity.created(uri).body(user);
+    }
+
+    @PutMapping(value="/updateUser/{id}", consumes={"application/json","application/xml"})
+    public ResponseEntity modifyUser(@PathVariable int id, @RequestBody User user) {
+        if (!userlist.containsKey(id))
+            return ResponseEntity.notFound().build();
+        else {
+            System.out.println("Updating details of user id " + id);
+            userlist.put(id, user);
+            return ResponseEntity.ok().build();
+        }
+    }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity deleteUser(@PathVariable int id) {
+        if (!userlist.containsKey(id))
+            return ResponseEntity.notFound().build();
+        else {
+            System.out.println("Deleting details of user id" + id);
+            userlist.remove(id);
+            return ResponseEntity.ok().build();
+        }
+    }*/
+
 
 }
 
