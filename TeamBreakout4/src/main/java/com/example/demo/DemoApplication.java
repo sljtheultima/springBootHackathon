@@ -8,6 +8,12 @@ import org.springframework.context.annotation.Scope;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -26,5 +32,6 @@ public class DemoApplication {
         users.put(2, new User(2,"chongr", "jnjn3/@34","Goh Chong Rui"));
         return users;
     }
+
 
 }
