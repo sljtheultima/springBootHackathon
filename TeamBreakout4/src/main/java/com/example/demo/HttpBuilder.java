@@ -23,7 +23,8 @@ public class HttpBuilder {
         @Autowired
         ApiProperties apiProperties;
 
-        RestTemplate template = new RestTemplate();
+        @Autowired
+        RestTemplate restTemplate;
 
         public UriComponentsBuilder getFullUri(MultiValueMap<String, String> defaultvalues, Map<String,String> actualParams, String url){
             getParamsValues(defaultvalues,actualParams);
@@ -41,7 +42,7 @@ public class HttpBuilder {
         }
 
         public JsonNode getJsonObject(String urlStr) throws JsonProcessingException {
-            return new ObjectMapper().readTree(template.exchange(urlStr, HttpMethod.GET,httpHeader(),String.class).getBody().toString());
+            return new ObjectMapper().readTree(restTemplate.exchange(urlStr, HttpMethod.GET,httpHeader(),String.class).getBody().toString());
         }
 
         public void getParamsValues(MultiValueMap<String, String> defaultvalues, Map<String,String> actualParams){

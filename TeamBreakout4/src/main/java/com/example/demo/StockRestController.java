@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -67,6 +68,12 @@ public class StockRestController {
     public boolean isAuthenticated(Map<String,String> requestParams)
     {
         return requestParams.containsKey("username") && userRepository.findUserByUsername(requestParams.get("username")).size()>0;
+    }
+
+
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
     }
 
 
