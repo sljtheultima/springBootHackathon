@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/finance")
 @CrossOrigin
-@ConfigurationProperties(prefix="api")
+
 public class FinancialRestController {
 
 
