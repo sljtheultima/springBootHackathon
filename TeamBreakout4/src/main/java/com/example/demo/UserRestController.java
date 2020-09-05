@@ -22,16 +22,19 @@ public class UserRestController{
     @Autowired
     private Map<Integer, User> userlist;*/
 
-   @GetMapping(value="/AllUsers", produces={"application/json","application/xml"})
+    // Get all users
+    @GetMapping(value="/AllUsers", produces={"application/json","application/xml"})
     public List<User> getAllUsers() {
         return service.getAllUsers();
     }
 
+    // Get user by username
     @GetMapping(value="/getUserByUserName/{username}", produces={"application/json","application/xml"})
     public List<User> getUserByUserName(@PathVariable String username) {
         return service.getUserByUserName(username);
     }
 
+    // Get user by fullname
     @GetMapping(value="/getUserByFullName/{fullname}", produces={"application/json","application/xml"})
     public List<User> getUserByFullName(@PathVariable String fullname) {
         System.out.println("Searching by fullname: " + fullname);
@@ -39,6 +42,7 @@ public class UserRestController{
         return service.getUserByUserName(fullname);
     }
 
+    // Insert new user
     @PostMapping(value="/insertNewUser",consumes={"application/json","application/xml"},
             produces={"application/json","application/xml"})
     public ResponseEntity<User> addUser (@RequestBody User user) {
@@ -48,6 +52,7 @@ public class UserRestController{
         return ResponseEntity.created(uri).body(user);
     }
 
+    // Update current user by username
     @PutMapping(value="/updateUserByUsername/{username}", consumes={"application/json","application/xml"})
     public ResponseEntity modifyUser(@PathVariable String username, @RequestBody User user) {
         if (service.getUserByUserName(username) == null)
@@ -68,6 +73,7 @@ public class UserRestController{
         }
     }
 
+    // Delete user by username
     @DeleteMapping("/deleteUserByUserName/{username}")
     public ResponseEntity deleteUser(@PathVariable String username) {
         if (service.getUserByUserName(username) == null)
