@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -7,9 +8,19 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties("apiinfo")
 public class ApiProperties {
 
+
     private String host_name;
     private String host_value;
     private String key_name;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getHost_name() {
         return host_name;

@@ -9,11 +9,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -26,9 +28,14 @@ public class HttpBuilder {
         @Autowired
         RestTemplate restTemplate;
 
+        public UriComponentsBuilder getFullUri(String url){
+            return getFullUri(new LinkedMultiValueMap<String,String>(),Collections.emptyMap(),url);
+        }
+
         public UriComponentsBuilder getFullUri(MultiValueMap<String, String> defaultvalues, Map<String,String> actualParams, String url){
+
             getParamsValues(defaultvalues,actualParams);
-            return UriComponentsBuilder.fromHttpUrl(url).queryParams(defaultvalues);
+            return UriComponentsBuilder.fromHttpUrl(apiProperties.getUrl().concat(url)).queryParams(defaultvalues);
 
         }
 
@@ -47,14 +54,7 @@ public class HttpBuilder {
 
         public void getParamsValues(MultiValueMap<String, String> defaultvalues, Map<String,String> actualParams){
             actualParams.forEach((k,v) ->{
-                if(!defaultvalues.containsKey(k))
-                {
-                    defaultvalues.add(k,actualParams.get(k));
-                }
-                else{
-                    defaultvalues.replace(k, Collections.singletonList(actualParams.get(k)));
-                }
-
+                defaultvalues.put(k, Collections.singletonList(actualParams.get(k)));
             });
 
 
