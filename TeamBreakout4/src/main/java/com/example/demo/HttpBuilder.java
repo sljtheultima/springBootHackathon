@@ -13,6 +13,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Collections;
 import java.util.Map;
 
 @Component
@@ -45,7 +46,14 @@ public class HttpBuilder {
 
         public void getParamsValues(MultiValueMap<String, String> defaultvalues, Map<String,String> actualParams){
             actualParams.forEach((k,v) ->{
-                defaultvalues.add(k,defaultvalues.getFirst(k));
+                if(!defaultvalues.containsKey(k))
+                {
+                    defaultvalues.add(k,actualParams.get(k));
+                }
+                else{
+                    defaultvalues.replace(k, Collections.singletonList(actualParams.get(k)));
+                }
+
             });
 
 
