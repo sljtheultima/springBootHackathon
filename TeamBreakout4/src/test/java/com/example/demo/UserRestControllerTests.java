@@ -39,16 +39,17 @@ public class UserRestControllerTests {
         assertEquals(HttpStatus.OK , responseEntity.getStatusCode());
         assertEquals(1, responseBody.size ()); // expected 1
     }
-/*
+
+    // Testing get user by fullname
     @Test
     public void testGetUserByFullName(){
-        ResponseEntity<List<User>> responseEntity = restTemplate.exchange("/getUserByUserName/Wong Xin Xian", HttpMethod.GET,null,
+        ResponseEntity<List<User>> responseEntity = restTemplate.exchange("/getUserByFullName/Goh Chong Rui", HttpMethod.GET,null,
                 new ParameterizedTypeReference<List<User>>(){});
 
         List<User>responseBody = responseEntity.getBody();
         assertEquals(HttpStatus.OK , responseEntity.getStatusCode());
         assertEquals(1, responseBody.size ()); // expected 1
-    }*/
+    }
 
 
     // Testing insert new user
