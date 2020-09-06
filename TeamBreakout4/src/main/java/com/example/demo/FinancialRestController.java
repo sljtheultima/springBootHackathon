@@ -30,7 +30,7 @@ public class FinancialRestController {
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "/market/getEarnings")
+    @GetMapping(value = "/market/getEarnings",produces = {"application/xml","application/json"})
     public ResponseEntity<JsonNode> getEarningsData(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
 
         if(isAuthenticated(username))
@@ -49,7 +49,7 @@ public class FinancialRestController {
 
     }
 
-    @GetMapping("/market/getPopularWatchlist")
+    @GetMapping(value= "/market/getPopularWatchlist",produces = {"application/xml","application/json"})
     public ResponseEntity<JsonNode> getPopularList(@RequestHeader("username") String username) throws JsonProcessingException {
         if(isAuthenticated(username)){
             String url = "/market/get-popular-watchlists";
@@ -60,7 +60,7 @@ public class FinancialRestController {
 
     }
 
-    @GetMapping("/stock/historicalData")
+    @GetMapping(value = "/stock/historicalData",produces = {"application/xml","application/json"})
    public ResponseEntity<JsonNode> getHistoricalData(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
 
         if(isAuthenticated(username))
@@ -76,7 +76,7 @@ public class FinancialRestController {
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
-    @GetMapping("/stock/news")
+    @GetMapping(value = "/stock/news",produces = {"application/xml","application/json"})
     public ResponseEntity<JsonNode> getStockNews(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
         if(isAuthenticated(username)){
             MultiValueMap<String,String> queryParams = new LinkedMultiValueMap<>();
@@ -89,7 +89,7 @@ public class FinancialRestController {
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
-    @GetMapping("/news")
+    @GetMapping(value = "/news",produces = {"application/xml","application/json"})
     public ResponseEntity<JsonNode> getNews(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
         if(isAuthenticated(username)){
             MultiValueMap<String,String> queryParams = new LinkedMultiValueMap<>();
