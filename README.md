@@ -1,6 +1,9 @@
 # springBootHackathon
 Task allocation:
+
 Feature 1 - Wong Xin Xian
+* Implemented Spring Boot REST service that provide CRUD support
+* Communicate with the database to perform CRUD actions
 
 Feature 2 - Sim Li Jin (Hal)
 * Implemented data-access code to query, insert, update, delete user info to a local MongoDB database (localhost:27017/test)
@@ -14,3 +17,5 @@ Feature 2 - Sim Li Jin (Hal)
     * Delete User
     
 Feature 3 - Goh Chong Rui
+* Implemented Spring Boot REST service that calls into back-end stock market API
+* Only registerd users are allowed to use this service
