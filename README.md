@@ -17,5 +17,9 @@ Feature 2 - Sim Li Jin (Hal)
     * Delete User
     
 Feature 3 - Goh Chong Rui
-* Implemented Spring Boot REST service that calls into back-end stock market API
+* Implemented Spring Boot REST service that calls into back-end stock market API using RestTemplate
 * Only registerd users are allowed to use this service
+* Rest controller file - FinancialRestController.java
+* Base Url- Yahoo Finance, https://rapidapi.com/apidojo/api/yahoo-finance1
+* Endpoints - /market/get-earnings,/market/get-popular-watchlist,/stock/v2/get-historicaldata,/stock/get-news,/news
+           
