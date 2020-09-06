@@ -36,11 +36,7 @@ public class UserRestController{
 
     // Get user by fullname
     @GetMapping(value="/getUserByFullName/{fullname}", produces={"application/json","application/xml"})
-    public List<User> getUserByFullName(@PathVariable String fullname) {
-        System.out.println("Searching by fullname: " + fullname);
-
-        return service.getUserByUserName(fullname);
-    }
+    public List<User> getUserByFullName(@PathVariable String fullname) { return service.getUserByFullName(fullname); }
 
     // Insert new user
     @PostMapping(value="/insertNewUser",consumes={"application/json","application/xml"},

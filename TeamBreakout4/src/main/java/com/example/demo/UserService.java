@@ -19,9 +19,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public List<User> getUserByUserName(String username){
-        return repository.findUserByUsername(username);
-    }
+    public List<User> getUserByUserName(String username){ return repository.findUserByUsername(username); }
 
     public List<User> getUserByFullName(String fullName){
         return repository.findUserByFullName(fullName);
@@ -35,10 +33,4 @@ public class UserService {
         repository.deleteUserByUsername(username);
     }
 
-//    private void displayUser(String message, Iterable<User> users) {
-//        System.out.printf("\n%s\n", message);
-//        for (User emp : users) {
-//            System.out.println(emp);
-//        }
-//    }
 }

@@ -40,16 +40,4 @@ public class DemoApplication {
 
     }
 
-    /*
-    //Mock Implementation for Feature 1
-    @Bean
-    @Scope("application")
-    public Map<Integer, User> userlist() {
-        Map<Integer, User> users = new HashMap<>();
-        users.put(0, new User(0,"hal", "hjk3n3kf","Sim Li Jin"));
-        users.put(1, new User(1,"wongxx", "012udker!","Wong Xin Xian"));
-        users.put(2, new User(2,"chongr", "jnjn3/@34","Goh Chong Rui"));
-        return users;
-    }*/
-
 }
