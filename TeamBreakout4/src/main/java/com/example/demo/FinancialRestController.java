@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class FinancialRestController {
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "/market/getEarnings",produces = {"application/xml","application/json"})
+    @GetMapping(value = "/market/getEarnings",produces = {"application/json","application/xml"})
     public ResponseEntity<JsonNode> getEarningsData(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
 
         if(isAuthenticated(username))
@@ -41,7 +42,7 @@ public class FinancialRestController {
             queryParams.add("region", "US");
 
             String url = "/market/get-earnings";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()));
+            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("finance").path("result"));
         }
 
         return new ResponseEntity(HttpStatus.FORBIDDEN);
@@ -49,18 +50,18 @@ public class FinancialRestController {
 
     }
 
-    @GetMapping(value= "/market/getPopularWatchlist",produces = {"application/xml","application/json"})
-    public ResponseEntity<JsonNode> getPopularList(@RequestHeader("username") String username) throws JsonProcessingException {
+    @GetMapping(value= "/market/getPopularWatchlist",produces = {"application/json","application/xml"})
+    public ResponseEntity<JsonNode> getPopularList(@RequestHeader(value = "username",required = true)  String username) throws JsonProcessingException {
         if(isAuthenticated(username)){
             String url = "/market/get-popular-watchlists";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(url).toUriString()));
+            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(url).toUriString()).path("finance").path("result"));
         }
 
         return new ResponseEntity(HttpStatus.FORBIDDEN);
 
     }
 
-    @GetMapping(value = "/stock/historicalData",produces = {"application/xml","application/json"})
+    @GetMapping(value = "/stock/historicalData",produces = {"application/json","application/xml"})
    public ResponseEntity<JsonNode> getHistoricalData(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
 
         if(isAuthenticated(username))
@@ -76,7 +77,7 @@ public class FinancialRestController {
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
-    @GetMapping(value = "/stock/news",produces = {"application/xml","application/json"})
+    @GetMapping(value = "/stock/news",produces = {"application/json","application/xml"})
     public ResponseEntity<JsonNode> getStockNews(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
         if(isAuthenticated(username)){
             MultiValueMap<String,String> queryParams = new LinkedMultiValueMap<>();
@@ -84,12 +85,12 @@ public class FinancialRestController {
             queryParams.add("category","NBEV");
 
             String url = "/stock/get-news";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()));
+            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("items").path("result"));
         }
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
-    @GetMapping(value = "/news",produces = {"application/xml","application/json"})
+    @GetMapping(value = "/news",produces = {"application/json","application/xml"})
     public ResponseEntity<JsonNode> getNews(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
         if(isAuthenticated(username)){
             MultiValueMap<String,String> queryParams = new LinkedMultiValueMap<>();
@@ -97,7 +98,7 @@ public class FinancialRestController {
             queryParams.add("region","US");
 
             String url = "/news/list";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()));
+            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("items").path("result"));
         }
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
