@@ -23,6 +23,7 @@ public class DemoApplication {
 
         User newUser = new User("test", "test", "testing");
         service.insertNewUser(newUser);
+        newUser.toString();
 
         service.getAllUsers();
 
@@ -36,7 +37,6 @@ public class DemoApplication {
 
         // delete
         service.deleteUserByUserName("test");
-
 
     }
 

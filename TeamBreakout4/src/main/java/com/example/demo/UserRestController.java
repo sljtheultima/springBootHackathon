@@ -5,22 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
-
-
 public class UserRestController{
 
     @Autowired
     private UserService service;
-
-   /* //For mock implementation for Feature 1
-    @Autowired
-    private Map<Integer, User> userlist;*/
 
     // Get all users
     @GetMapping(value="/AllUsers", produces={"application/json","application/xml"})
@@ -80,46 +71,6 @@ public class UserRestController{
             return ResponseEntity.ok().build();
         }
     }
-
-  /*  //Mock Implementation on userlist for Feature 1
-
-    @GetMapping(value="/AllUsers", produces={"application/json","application/xml"})
-    public ResponseEntity<Collection<User>> getAllUsers() {
-        Collection<User> result = userlist.values();
-        return ResponseEntity.ok().body(result);
-    }
-
-
-    @PostMapping(value="/insertNewUser",consumes={"application/json","application/xml"},
-            produces={"application/json","application/xml"})
-    public ResponseEntity<User> addUser (@RequestBody User user) {
-        System.out.println("Adding " + user);
-        userlist.put(user.getId(), user);
-        URI uri = URI.create("/user/" + user.getUsername());
-        return ResponseEntity.created(uri).body(user);
-    }
-
-    @PutMapping(value="/updateUser/{id}", consumes={"application/json","application/xml"})
-    public ResponseEntity modifyUser(@PathVariable int id, @RequestBody User user) {
-        if (!userlist.containsKey(id))
-            return ResponseEntity.notFound().build();
-        else {
-            System.out.println("Updating details of user id " + id);
-            userlist.put(id, user);
-            return ResponseEntity.ok().build();
-        }
-    }
-
-    @DeleteMapping("/deleteUser/{id}")
-    public ResponseEntity deleteUser(@PathVariable int id) {
-        if (!userlist.containsKey(id))
-            return ResponseEntity.notFound().build();
-        else {
-            System.out.println("Deleting details of user id" + id);
-            userlist.remove(id);
-            return ResponseEntity.ok().build();
-        }
-    }*/
 
 
 }
