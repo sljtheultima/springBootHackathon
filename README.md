@@ -30,7 +30,7 @@ Feature 3 - Goh Chong Rui
 ### Week 4 Hackathon
 
 Dockerfile & docker-compose - Zhou Nan
-* Containerize the application and database through using Dockerfiles: Dockerfile-mongodb & Dockerfile-app which will building using .jar file
+* Containerize the application and database through using Dockerfiles: Dockerfile-mongodb & Dockerfile-app which will build using .jar file
 * Orchestrate the containers using docker-compose.yaml
 * On labs.play-with-docker.com run "docker-compose up -d" with files Dockerfile-app, Dockerfile-mongodb, demo-0.0.1-SNAPSHOT.jar and docker-compose.yaml
 
