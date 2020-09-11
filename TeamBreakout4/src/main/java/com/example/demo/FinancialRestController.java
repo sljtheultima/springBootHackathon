@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/finance")
 @CrossOrigin
-
+@Slf4j
 public class FinancialRestController {
 
 
@@ -30,6 +31,9 @@ public class FinancialRestController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    Log logger;
 
     @GetMapping(value = "/market/getEarnings",produces = {"application/json","application/xml"})
     public ResponseEntity<JsonNode> getEarningsData(@RequestParam Map<String,String> allRequestParams,@RequestHeader("username") String username) throws JsonProcessingException {
@@ -42,9 +46,13 @@ public class FinancialRestController {
             queryParams.add("region", "US");
 
             String url = "/market/get-earnings";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("finance").path("result"));
+            JsonNode result = httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("finance").path("result");
+
+            logger.logSuccess(HttpStatus.ACCEPTED.toString() );
+            return ResponseEntity.ok(result);
         }
 
+        logger.logError(HttpStatus.FORBIDDEN.toString());
         return new ResponseEntity(HttpStatus.FORBIDDEN);
 
 
@@ -54,9 +62,12 @@ public class FinancialRestController {
     public ResponseEntity<JsonNode> getPopularList(@RequestHeader(value = "username",required = true)  String username) throws JsonProcessingException {
         if(isAuthenticated(username)){
             String url = "/market/get-popular-watchlists";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(url).toUriString()).path("finance").path("result"));
-        }
 
+            JsonNode result = httpBuilder.getJsonObject(httpBuilder.getFullUri(url).toUriString()).path("finance").path("result");
+            logger.logSuccess(HttpStatus.ACCEPTED.toString());
+            return ResponseEntity.ok(result);
+        }
+        logger.logError(HttpStatus.FORBIDDEN.toString());
         return new ResponseEntity(HttpStatus.FORBIDDEN);
 
     }
@@ -72,8 +83,12 @@ public class FinancialRestController {
             queryParams.add("symbol","AMRN");
 
             String url = "/stock/v2/get-historical-data";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()));
+            JsonNode result = httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString());
+            logger.logSuccess(HttpStatus.ACCEPTED.toString() );
+            return ResponseEntity.ok(result);
+
         }
+        logger.logError(HttpStatus.FORBIDDEN.toString());
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
@@ -85,8 +100,11 @@ public class FinancialRestController {
             queryParams.add("category","NBEV");
 
             String url = "/stock/get-news";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("items").path("result"));
+            JsonNode result = httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("items").path("result");
+            logger.logSuccess(HttpStatus.ACCEPTED.toString());
+            return ResponseEntity.ok(result);
         }
+        logger.logError(HttpStatus.FORBIDDEN.toString());
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
@@ -98,8 +116,11 @@ public class FinancialRestController {
             queryParams.add("region","US");
 
             String url = "/news/list";
-            return ResponseEntity.ok(httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("items").path("result"));
+            JsonNode result = httpBuilder.getJsonObject(httpBuilder.getFullUri(queryParams,allRequestParams,url).toUriString()).path("items").path("result");
+            logger.logSuccess(HttpStatus.ACCEPTED.toString());
+            return ResponseEntity.ok(result);
         }
+        logger.logError(HttpStatus.FORBIDDEN.toString());
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
@@ -108,6 +129,8 @@ public class FinancialRestController {
     {
         return userService.getUserByUserName(username).size()>0;
     }
+
+
 
 
     @Bean
