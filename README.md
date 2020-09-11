@@ -1,5 +1,7 @@
 # springBootHackathon
 Task allocation:
+==================================================================================================================================
+WEEK 3 Hackathon
 
 Feature 1 - Wong Xin Xian
 * Implemented Spring Boot REST service that provides CRUD support for managing users- UserRestController.java
@@ -25,3 +27,16 @@ Feature 3 - Goh Chong Rui
 * Base Url- Yahoo Finance, https://rapidapi.com/apidojo/api/yahoo-finance1
 * Endpoints - /market/get-earnings,/market/get-popular-watchlist,/stock/v2/get-historicaldata,/stock/get-news,/news
            
+=================================================================================================================================
+WEEK 4 Hackathon
+
+Dockerfile & docker-compose - Zhou Nan
+* Containerize the application and database through using Dockerfiles: Dockerfile-mongodb & Dockerfile-app which will building using .jar file
+* Orchestrate the containers using docker-compose.yaml
+* On labs.play-with-docker.com run "docker-compose up -d" with files Dockerfile-app, Dockerfile-mongodb, demo-0.0.1-SNAPSHOT.jar and docker-compose.yaml
+
+Openshift - All
+* Separated Dockerfiles into 2 different repositories
+  * MongoDB: https://github.com/gohc0079/mymongodb
+  * Application: https://github.com/gohc0079/SpringDockerRepo
+* Application is able to run on OpenShift and accessed once the port for the application is exposed
