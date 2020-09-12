@@ -30,7 +30,8 @@ Feature 3 - Goh Chong Rui
 ### Week 4 Hackathon
 
 Project Lombok - Chong Rui and Xin Xian
-* Made use of Project Lombok to implement logging and to simplify code
+* Made use of Project Lombok to implement logging and to simplify code using @Getter,@Setter and @ToString annotations
+* used sl4j to log success (Status code) and error messages (Status code) of the respectuve endpoints onto the console 
 
 Dockerfile & docker-compose - Zhou Nan and Li Jin (Hal)
 * Containerize the application and database through using Dockerfiles: Dockerfile-mongodb & Dockerfile-app which will build using .jar file
