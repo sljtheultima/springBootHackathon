@@ -36,7 +36,7 @@ Dockerfile & docker-compose - Zhou Nan and Li Jin (Hal)
 * Containerize the application and database through using Dockerfiles: Dockerfile-mongodb & Dockerfile-app which will build using .jar file
 * Orchestrate the containers using docker-compose.yaml
 * On labs.play-with-docker.com run "docker-compose up -d" with files Dockerfile-app, Dockerfile-mongodb, demo-0.0.1-SNAPSHOT.jar and docker-compose.yaml
-* Reduced the image size of mongodb and java with the use of alpine. However, we revert the mongodb to the normal as it doesn't work with Openshift.
+* Reduced the image size of mongodb and java with the use of alpine linux. However, we revert the mongodb to the normal as it doesn't work with Openshift.
 
 Openshift - All
 * Separated Dockerfiles into 2 different repositories
