@@ -29,13 +29,21 @@ Feature 3 - Goh Chong Rui
 
 ### Week 4 Hackathon
 
-Dockerfile & docker-compose - Zhou Nan
+Project Lombok - Chong Rui and Xin Xian
+* Made use of Project Lombok to implement logging and to simplify code
+
+Dockerfile & docker-compose - Zhou Nan and Li Jin (Hal)
 * Containerize the application and database through using Dockerfiles: Dockerfile-mongodb & Dockerfile-app which will build using .jar file
 * Orchestrate the containers using docker-compose.yaml
 * On labs.play-with-docker.com run "docker-compose up -d" with files Dockerfile-app, Dockerfile-mongodb, demo-0.0.1-SNAPSHOT.jar and docker-compose.yaml
+* Reduced the image size of mongodb and java with the use of alpine. However, we revert the mongodb to the normal as it doesn't work with Openshift.
 
 Openshift - All
 * Separated Dockerfiles into 2 different repositories
   * MongoDB: https://github.com/gohc0079/mymongodb
   * Application: https://github.com/gohc0079/SpringDockerRepo
 * Application is able to run on OpenShift and accessed once the port for the application is exposed
+
+AWS - All
+* Spin up an EC2 instance and initialise the docker daemon inside the instance
+  * Link to EC2 instance:http://15.206.202.111:8080/AllUsers
