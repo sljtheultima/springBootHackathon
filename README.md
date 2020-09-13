@@ -48,3 +48,9 @@ Openshift - All
 AWS - All
 * Spin up an EC2 instance and initialise the docker daemon inside the instance
   * Link to EC2 instance:http://15.206.202.111:8080/AllUsers
+  * Not an effective solution in the long run if the application would require to scale up, in terms of cost and effort placed
+* Alternatively, there are other features that are available in AWS that can be used but was not done due to time constraint and requiring spending of money
+  * An EC2 instance with Jenkins pipeline configure such that it will make the necessary changes based on a commit from the git repo
+  * Hosting the Spring Boot on to AWS Elastic Container Service, which acts as a standalone application
+     * Alternatively, another possibility would be to use AWS lambda services and expose the response url
+  * Hosting the Mongo DB on to AWS Dynamo DB, as it supports NoSQL database
